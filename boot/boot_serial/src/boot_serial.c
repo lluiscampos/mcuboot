@@ -1034,7 +1034,9 @@ boot_serial_input(char *buf, int len)
             bs_rc_rsp(0);
             break;
         case NMGR_ID_RESET:
-            bs_reset(buf, len);
+            //bs_reset(buf, len);
+            bs_rc_rsp(0);
+            bs_entry = false;
             break;
         default:
             bs_rc_rsp(MGMT_ERR_ENOTSUP);

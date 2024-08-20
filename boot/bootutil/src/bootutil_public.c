@@ -226,6 +226,9 @@ boot_read_swap_state(const struct flash_area *fap,
     int rc;
 
     off = boot_magic_off(fap);
+
+    BOOT_LOG_INF("LLUIS DEBUG At flash area 0x%lx device %u", fap->fa_off, fap->fa_id);
+
     rc = flash_area_read(fap, off, magic, BOOT_MAGIC_SZ);
     if (rc < 0) {
         return BOOT_EFLASH;

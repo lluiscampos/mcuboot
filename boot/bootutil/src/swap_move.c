@@ -309,7 +309,7 @@ boot_slots_compatible(struct boot_loader_state *state)
 }
 
 #define BOOT_LOG_SWAP_STATE(area, state)                            \
-    BOOT_LOG_INF("%s: magic=%s, swap_type=0x%x, copy_done=0x%x, "   \
+    BOOT_LOG_INF("LLUIS DEBUG %s: magic=%s, swap_type=0x%x, copy_done=0x%x, "   \
                  "image_ok=0x%x",                                   \
                  (area),                                            \
                  ((state)->magic == BOOT_MAGIC_GOOD ? "good" :      \

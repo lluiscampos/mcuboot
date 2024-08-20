@@ -315,6 +315,25 @@ static void do_boot(struct boot_rsp *rsp)
     rc = flash_device_base(rsp->br_flash_dev_id, &flash_base);
     assert(rc == 0);
 
+    // flash_base = 0x119f80;
+    flash_base = 0x115620;
+
+    // BOOT_LOG_INF("LLUIS DEBUG Will execute stuff at 0x%lx", flash_base + rsp->br_image_off +
+    //                  rsp->br_hdr->ih_hdr_size);
+
+    // BOOT_LOG_INF("LLUIS DEBUG base 0x%lx, off 0x%x, hrd 0x%x", flash_base, rsp->br_image_off ,
+    //                  rsp->br_hdr->ih_hdr_size);
+
+    // hexDump("FLASH MEMORY", (void *)0x119f80 + 0x11000, 0x00021000);
+
+    // uint8_t* app_start = (uint8_t*)flash_base + rsp->br_image_off;
+
+    // for (size_t idx=0; idx<1000; idx++) {
+    //     BOOT_LOG_INF("%03x %02x ", idx, (uint8_t)*(app_start + idx));
+    // }
+
+    // ZEPHYR_BOOT_LOG_STOP();
+
     start = (void *)(flash_base + rsp->br_image_off +
                      rsp->br_hdr->ih_hdr_size);
 #endif
@@ -432,6 +451,8 @@ int main(void)
 
     (void)rc;
 
+    lluis_hack:
+
     mcuboot_status_change(MCUBOOT_STATUS_STARTUP);
 
 #ifdef CONFIG_BOOT_SERIAL_ENTRANCE_GPIO
@@ -529,6 +550,8 @@ int main(void)
          * recovery mode
          */
         boot_serial_enter();
+
+        goto lluis_hack;
 #endif
 
         FIH_PANIC;
